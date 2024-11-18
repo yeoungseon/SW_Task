@@ -1,0 +1,28 @@
+#include <string>
+#include <vector>
+#include <sstream>
+
+
+using namespace std;
+
+int solution(string s) {
+    int answer = 0;
+    vector<int> history;
+    stringstream ss(s);
+    string temp;
+
+    while (ss >> temp) {
+        if (temp == "Z") {
+            if (!history.empty()) {
+                answer -= history.back();
+                history.pop_back();
+            }
+        } else {
+            int num = stoi(temp);
+            answer += num;
+            history.push_back(num);
+        }
+    }
+
+    return answer;
+}
